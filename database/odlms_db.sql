@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 03, 2023 at 11:40 AM
--- Server version: 10.4.24-MariaDB
--- PHP Version: 8.1.6
+-- Generation Time: Feb 11, 2023 at 05:01 AM
+-- Server version: 10.4.27-MariaDB
+-- PHP Version: 7.4.33
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -36,7 +36,7 @@ CREATE TABLE `appointment_list` (
   `status` tinyint(1) NOT NULL DEFAULT 0,
   `date_created` datetime NOT NULL DEFAULT current_timestamp(),
   `date_updated` datetime DEFAULT NULL ON UPDATE current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `appointment_list`
@@ -115,7 +115,7 @@ CREATE TABLE `appointment_test_list` (
   `appointment_id` int(30) NOT NULL,
   `test_id` int(30) NOT NULL,
   `date_created` datetime NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `appointment_test_list`
@@ -203,7 +203,7 @@ CREATE TABLE `client_list` (
   `delete_flag` tinyint(1) NOT NULL DEFAULT 0,
   `date_created` datetime NOT NULL DEFAULT current_timestamp(),
   `date_updated` datetime DEFAULT NULL ON UPDATE current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `client_list`
@@ -214,7 +214,8 @@ INSERT INTO `client_list` (`id`, `firstname`, `middlename`, `lastname`, `gender`
 (5, 'John', 'D', 'Smith', 'Male', '09456789123', 'jsmith@sample.com', '1254737c076cf867dc53d60a0364f38e', '1997-07-15', 'Sample ADdress only.', 'uploads/client-5.png?v=1641891731', 0, '2022-01-11 16:56:43', '2022-01-11 17:02:11'),
 (6, 'Mizy', 'A', 'Smith', 'Male', '0943-815-3339', 'johh@gmail.com', 'cee46cdd32fe76ef3e0462df7a13147f', '2022-12-07', 'SSSSSS', NULL, 0, '2022-12-14 19:04:51', NULL),
 (7, 'Chris', 'Chris', 'Brown', 'Male', '0983-838-3831', 'chris@gmail.com', '65c9d8cca12f8febe43e94926fccd384', '2022-12-01', 'Talangnan', NULL, 0, '2022-12-15 04:08:29', NULL),
-(8, 'cg', '', 'layese', 'Male', '0995-915-3358', 'cg@gmail.com', 'c582bac08dba78866883ba4e5f84ae92', '1999-04-16', 'kodia', NULL, 0, '2023-02-02 22:23:51', NULL);
+(8, 'cg', '', 'layese', 'Male', '0995-915-3358', 'cg@gmail.com', 'c582bac08dba78866883ba4e5f84ae92', '1999-04-16', 'kodia', NULL, 0, '2023-02-02 22:23:51', NULL),
+(9, 'Test', '', 'Test', 'Male', '0946-507-5177', 'test@gmail.com', '5c90b96a75d4f9d5a1cfaa6f532afdc8', '2023-02-06', 'test', NULL, 0, '2023-02-06 00:16:39', NULL);
 
 -- --------------------------------------------------------
 
@@ -228,7 +229,7 @@ CREATE TABLE `history_list` (
   `status` tinyint(4) NOT NULL DEFAULT 0,
   `remarks` text NOT NULL,
   `date_created` datetime NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `history_list`
@@ -242,6 +243,47 @@ INSERT INTO `history_list` (`id`, `appointment_id`, `status`, `remarks`, `date_c
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `messages`
+--
+
+CREATE TABLE `messages` (
+  `id` int(11) NOT NULL,
+  `sender_id` int(11) NOT NULL,
+  `recipient_id` int(11) NOT NULL,
+  `message` varchar(255) NOT NULL,
+  `isRead` int(11) NOT NULL,
+  `created_at` datetime DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `messages`
+--
+
+INSERT INTO `messages` (`id`, `sender_id`, `recipient_id`, `message`, `isRead`, `created_at`) VALUES
+(1, 1, 9, 'Hi im admin', 0, '2023-02-06 00:47:58'),
+(2, 9, 1, 'hi im user', 0, '2023-02-06 00:48:14'),
+(3, 9, 1, 'testing', 0, '2023-02-06 01:16:32'),
+(4, 9, 1, 'just say hi', 0, '2023-02-06 01:18:38'),
+(5, 9, 1, 'adfafadf', 0, '2023-02-06 01:19:11'),
+(6, 9, 1, 'aloha', 0, '2023-02-06 01:22:31'),
+(7, 9, 1, 'todo: message feature in admin', 0, '2023-02-06 01:23:28'),
+(8, 1, 9, 'hey thi is admin', 0, '2023-02-08 18:40:07'),
+(9, 1, 9, 'how is it?', 0, '2023-02-08 18:40:44'),
+(10, 1, 9, 'hey?', 0, '2023-02-08 18:41:19'),
+(11, 1, 9, 'asdfadsfasdf', 0, '2023-02-08 18:41:40'),
+(12, 1, 9, 'nag error', 0, '2023-02-08 18:41:57'),
+(13, 1, 9, 'yeah', 0, '2023-02-08 18:42:59'),
+(14, 1, 9, 'hey', 0, '2023-02-08 18:43:16'),
+(15, 1, 9, 'sdfsdfsdfdsfsdf', 0, '2023-02-08 18:43:35'),
+(16, 1, 9, 'hello', 0, '2023-02-08 18:44:23'),
+(17, 9, 1, 'hellow', 0, '2023-02-08 18:47:14'),
+(18, 1, 9, 'how can i help you?', 0, '2023-02-08 18:47:28'),
+(19, 9, 1, 'hey im test user', 0, '2023-02-08 18:56:16'),
+(20, 1, 9, 'nice meeting you', 0, '2023-02-08 18:56:47');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `schedule_settings`
 --
 
@@ -249,7 +291,7 @@ CREATE TABLE `schedule_settings` (
   `meta_field` text NOT NULL,
   `meta_value` text NOT NULL,
   `date_create` datetime NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `schedule_settings`
@@ -270,7 +312,7 @@ CREATE TABLE `system_info` (
   `id` int(30) NOT NULL,
   `meta_field` text NOT NULL,
   `meta_value` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `system_info`
@@ -298,7 +340,7 @@ CREATE TABLE `test_list` (
   `delete_flag` tinyint(1) NOT NULL DEFAULT 0,
   `date_created` datetime NOT NULL DEFAULT current_timestamp(),
   `date_updated` datetime DEFAULT NULL ON UPDATE current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `test_list`
@@ -331,7 +373,7 @@ CREATE TABLE `users` (
   `status` int(1) NOT NULL DEFAULT 1 COMMENT '0=not verified, 1 = verified',
   `date_added` datetime NOT NULL DEFAULT current_timestamp(),
   `date_updated` datetime DEFAULT NULL ON UPDATE current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `users`
@@ -374,6 +416,12 @@ ALTER TABLE `history_list`
   ADD KEY `appointment_id` (`appointment_id`);
 
 --
+-- Indexes for table `messages`
+--
+ALTER TABLE `messages`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `system_info`
 --
 ALTER TABLE `system_info`
@@ -405,13 +453,19 @@ ALTER TABLE `appointment_list`
 -- AUTO_INCREMENT for table `client_list`
 --
 ALTER TABLE `client_list`
-  MODIFY `id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `history_list`
 --
 ALTER TABLE `history_list`
   MODIFY `id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+
+--
+-- AUTO_INCREMENT for table `messages`
+--
+ALTER TABLE `messages`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT for table `system_info`
